@@ -1,3 +1,5 @@
+package org.hua.project.queue;
+
 /**
  * A queue
  *

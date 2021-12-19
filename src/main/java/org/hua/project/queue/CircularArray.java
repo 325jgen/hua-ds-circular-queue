@@ -1,12 +1,15 @@
+package org.hua.project.queue;
+
+/**
+ * A Queue implemented as a Circular Array
+ * @param <E>
+ */
 public class CircularArray<E> implements Queue<E> {
 
     static private final int DEFAULT_SIZE = 8;
     private E[] array;
     private int size;
 
-    // f > r --> wrapped array (n - (f - r) + 1)
-    // f < r --> serial array (r - f - 1)
-    // f = r --> empty array
     private int f, r;
 
     @SuppressWarnings("unchecked")
@@ -27,7 +30,11 @@ public class CircularArray<E> implements Queue<E> {
 
     @Override
     public E pop() {
-        E prev = array[f];
+        if (this.first() == null) {
+            throw new IllegalArgumentException("No items left in Array to pop");
+        }
+
+        E prev = this.first();
         if (size <= 0.25 * array.length) halfSize();
         f = (f + 1) % array.length;
         size--;
@@ -36,6 +43,9 @@ public class CircularArray<E> implements Queue<E> {
 
     @Override
     public E first() {
+        if (array[f] == null) {
+            throw new IllegalArgumentException("Array is empty");
+        }
         return array[f];
     }
 
@@ -55,6 +65,8 @@ public class CircularArray<E> implements Queue<E> {
     @Override
     public void clear() {
         array = null;
+        f = 0;
+        r = 0;
         size = 0;
     }
 
