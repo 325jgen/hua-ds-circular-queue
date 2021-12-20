@@ -1,5 +1,7 @@
 package org.hua.project.queue;
 
+import java.util.NoSuchElementException;
+
 /**
  * A Queue implemented as a Circular Array
  * @param <E>
@@ -31,7 +33,7 @@ public class CircularArray<E> implements Queue<E> {
     @Override
     public E pop() {
         if (this.first() == null) {
-            throw new IllegalArgumentException("No items left in Array to pop");
+            throw new NoSuchElementException("No items left in Array to pop");
         }
 
         E prev = this.first();
@@ -44,7 +46,7 @@ public class CircularArray<E> implements Queue<E> {
     @Override
     public E first() {
         if (array[f] == null) {
-            throw new IllegalArgumentException("Array is empty");
+            throw new NoSuchElementException("Array is empty");
         }
         return array[f];
     }
@@ -56,21 +58,21 @@ public class CircularArray<E> implements Queue<E> {
 
     @Override
     public int size() {
-        if (f > r) return size - (f - r);
-        if (f < r) return r - f;
-        if (size == 0) return 0;
+//        if (f > r) return size - (f - r);
+//        if (f < r) return r - f;
+//        if (size == 0) return 0;
         return size;
     }
 
     @Override
     public void clear() {
-        array = null;
-        f = 0;
-        r = 0;
-        size = 0;
+        this.array = (E[]) new Object[DEFAULT_SIZE];
+        this.f = 0;
+        this.r = 0;
+        this.size = 0;
     }
 
-    public void doubleSize() {
+    private void doubleSize() {
         int newCapacity = 2 * array.length;
         E[] newArray = (E[]) new Object[newCapacity];
 
@@ -80,7 +82,7 @@ public class CircularArray<E> implements Queue<E> {
         r = size;
     }
 
-    public void halfSize() {
+    private void halfSize() {
         if (array.length <= DEFAULT_SIZE) {
             return;
         }

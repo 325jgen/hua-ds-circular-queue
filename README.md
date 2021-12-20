@@ -16,12 +16,6 @@ Create a jar using
 mvn package
 ```
 
-Run main using
-
-```
-java -cp target/ org.hua.queue.App
-```
-
 Run unit tests using
 
 ```
