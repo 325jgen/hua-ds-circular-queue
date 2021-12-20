@@ -58,9 +58,6 @@ public class CircularArray<E> implements Queue<E> {
 
     @Override
     public int size() {
-//        if (f > r) return size - (f - r);
-//        if (f < r) return r - f;
-//        if (size == 0) return 0;
         return size;
     }
 
@@ -102,6 +99,8 @@ public class CircularArray<E> implements Queue<E> {
         E[] newArray = (E[]) new Object[newCapacity];
 
         if (r - f >= 0) System.arraycopy(array, f, newArray, 0, Math.min((r - f), size));
+
+
 
         this.array = newArray;
         this.size = r = Math.min(size, newCapacity);

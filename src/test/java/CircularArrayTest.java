@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class CircularArrayTest {
 
     @Test
-    public void testLinkedQueue() {
+    public void testCircularArray() {
         Queue<Integer> q = new CircularArray<>();
         assertTrue(q.isEmpty());
         int count = 100000;
@@ -26,7 +26,7 @@ public class CircularArrayTest {
     }
 
     @Test
-    public void testLinkedQueue2() {
+    public void testCircularArray2() {
         Queue<Integer> q = new CircularArray<>();
         int count = 12;
         int i;
@@ -46,29 +46,23 @@ public class CircularArrayTest {
     }
 
     @Test
-    public void testLinkedQueue3() {
+    public void testCircularArray3() {
         Queue<Integer> q = new CircularArray<>();
-        int count = 12;
+        int count = 10;
 
         for (int i = 0; i < count; i++) {
             q.push(i);
         }
-        for (int i = 0; i < count - 1; i++) {
+        assertTrue(q.first() == 0);
+
+        for (int i = 0; i < count - 2; i++) {
             q.pop();
         }
-        for (int i = q.first() + 1; i < q.first() + 2; i++) {
+        assertTrue(q.pop() == count - 2);
+
+        for (int i = 0; i < count - 1; i++) {
             q.push(i);
         }
-        q.pop();
-        for (int i = 1; i < 7; i++) {
-            q.push(q.first() + i);
-        }
-        assertTrue(q.first() == 12);
+        assertTrue(q.first() == count - 1);
     }
-
-    @Test
-    public void testLinkedQueue4() {
-
-    }
-
 }
