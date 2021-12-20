@@ -76,10 +76,21 @@ public class CircularArray<E> implements Queue<E> {
         int newCapacity = 2 * array.length;
         E[] newArray = (E[]) new Object[newCapacity];
 
-        if (size >= 0) System.arraycopy(array, f, newArray, r, size);
+        int index = 0;
+        for (int i = f; i < array.length; i++) {
+            index = i - f;
+            newArray[index] = array[i];
+        }
+        index++;
+        if (r <= f) {
+            for (int i = 0; i < r-1; i++) {
+                newArray[index++] = array[i];
+            }
+        }
 
         this.array = newArray;
-        r = size;
+        r = size = index;
+        f = 0;
     }
 
     private void halfSize() {
